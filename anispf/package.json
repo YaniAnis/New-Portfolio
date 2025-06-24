@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^10.3.0",
+    "@react-three/fiber": "^9.1.2",
     "@types/react-router-dom": "^5.3.3",
     "framer-motion": "^12.19.1",
     "lucide-react": "^0.522.0",

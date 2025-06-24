@@ -1,3 +1,4 @@
+"use client"
 export default function Message() {
     return (
         <div className="">
@@ -16,6 +17,19 @@ export default function Message() {
                     placeholder="Your Email"
                     className="mb-4 p-2 border border-gray-300 rounded w-80"
                 />
+
+                <input
+                    type="Number"
+                    placeholder="Your phone number ex: +12 34567890"
+                    className="mb-4 p-2 border border-gray-300 rounded w-80"
+                />
+
+                <input
+                    type="Number"
+                    placeholder="Your Budget ex: $1000 - $5000"
+                    className="mb-4 p-2 border border-gray-300 rounded w-80"
+                />
+
                 <textarea
                     placeholder="Your Message"
                     className="mb-4 p-2 border border-gray-300 rounded w-80 h-32"

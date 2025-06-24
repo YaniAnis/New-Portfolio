@@ -1,3 +1,5 @@
+"use client";
+
 export default function ProjectCard() {
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
