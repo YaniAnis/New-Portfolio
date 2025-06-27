@@ -48,6 +48,9 @@ export default function Roadmap() {
 	const scrollStep = 10;
 	const scrollInterval = 10;
 
+	const upInterval = useRef<NodeJS.Timeout | null>(null);
+	const downInterval = useRef<NodeJS.Timeout | null>(null);
+
 	const { scrollYProgress } = useScroll({
 		container: scrollAreaRef,
 	});
@@ -80,26 +83,27 @@ export default function Roadmap() {
 		}
 	};
 
-	let upInterval: NodeJS.Timeout | null = null;
-	let downInterval: NodeJS.Timeout | null = null;
-
 	const startScroll = (direction: "up" | "down") => {
 		const fn = () => scrollBy(direction === "up" ? -scrollStep : scrollStep);
 		if (direction === "up") {
-			upInterval = setInterval(fn, scrollInterval);
+			if (!upInterval.current) {
+				upInterval.current = setInterval(fn, scrollInterval);
+			}
 		} else {
-			downInterval = setInterval(fn, scrollInterval);
+			if (!downInterval.current) {
+				downInterval.current = setInterval(fn, scrollInterval);
+			}
 		}
 	};
 
 	const stopScroll = (direction: "up" | "down") => {
-		if (direction === "up" && upInterval) {
-			clearInterval(upInterval);
-			upInterval = null;
+		if (direction === "up" && upInterval.current) {
+			clearInterval(upInterval.current);
+			upInterval.current = null;
 		}
-		if (direction === "down" && downInterval) {
-			clearInterval(downInterval);
-			downInterval = null;
+		if (direction === "down" && downInterval.current) {
+			clearInterval(downInterval.current);
+			downInterval.current = null;
 		}
 	};
 
@@ -108,7 +112,7 @@ export default function Roadmap() {
 			id="roadmap"
 			className="w-full flex flex-col items-center py-16 bg-gray-900 text-white"
 		>
-			<h2 className="text-3xl font-bold mb-2">Our Journey</h2>
+			<h2 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-4">Our Journey</h2>
 			<p className="mb-10 text-gray-300 text-lg">
 				The evolution of Flowers & Saints through the years
 			</p>
@@ -169,7 +173,7 @@ export default function Roadmap() {
 									}`}
 								>
 									{item.side === "left" && (
-										<div className="bg-gray-800 rounded-3xl p-4 shadow">
+										<div className="bg-gray-800 rounded-3xl p-4 shadow hover:shadow-xl transition-shadow duration-300">
 											<span className="text-blue-400 font-semibold">
 												{item.year}
 											</span>
