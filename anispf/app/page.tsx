@@ -25,7 +25,7 @@ export default function Home() {
 
 
 
-          <section id="projects" className="py-20 bg-gradient-to-r from-purple-900/20 to-teal-900/20">
+          <section id="projects" className="py-20 ">
             <div className="container mx-auto px-6">
               <div className="text-center mb-16">
                 <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-4">
@@ -37,12 +37,12 @@ export default function Home() {
               </div>
               <div className="flex flex-wrap justify-center items-center gap-8">
                 <ProjectCard
-                  photopath="/placeholder.svg?height=300&width=400"
+                  photopath="/Footix.png"
                   title="E-Commerce Platform"
                   description="A modern, responsive e-commerce solution built with Next.js, featuring real-time inventory management and seamless payment integration."
                 />
                 <ProjectCard
-                  photopath="/placeholder.svg?height=300&width=400"
+                  photopath="/Holy.png"
                   title="AI-Powered Dashboard"
                   description="An intelligent analytics dashboard that leverages machine learning to provide actionable insights and predictive analytics."
                 />
