@@ -11,7 +11,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 text-white">
       <Sidebar />
       <div className="pl-64 flex flex-col min-h-screen">
-        <div className="flex-1 flex flex-col overflow-auto">
+        <div className="flex-1 flex flex-col overflow-auto ">
           <Hero />
           <Desktop />
 
