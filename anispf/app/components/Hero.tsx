@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { motion, useAnimation } from "framer-motion"
+import { motion } from "framer-motion"
 import { ArrowDown, Sparkles, Download, Mail } from "lucide-react"
 import { useEffect, useState } from "react"
 
@@ -66,56 +66,23 @@ function TypingAnimation({ text, delay = 0 }: { text: string; delay?: number }) 
 }
 
 export default function Hero() {
-  const controls = useAnimation()
-
-  useEffect(() => {
-    controls.start({
-      background: [
-        "linear-gradient(45deg, #1f2937, #374151)",
-        "linear-gradient(45deg, #374151, #4b5563)",
-        "linear-gradient(45deg, #4b5563, #1f2937)",
-      ],
-      transition: {
-        duration: 10,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "linear",
-      },
-    })
-  }, [controls])
+  // Add handler for smooth scroll to contact
+  const handleContactClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const el = document.querySelector("#contact");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <motion.section
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      animate={controls}
+    <section
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gray-900"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 bg-gray-900 rounded-full blur-3xl"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-teal-500/20 to-blue-500/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, -100, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
+
+        
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10">
@@ -245,6 +212,7 @@ export default function Hero() {
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(20, 184, 166, 0.3)" }}
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg transition-all duration-300 flex items-center gap-3"
+            onClick={handleContactClick}
           >
             <Mail className="w-5 h-5" />
             Get In Touch
@@ -270,15 +238,10 @@ export default function Hero() {
             }}
             className="text-purple-400 cursor-pointer"
           >
-            <motion.div
-              whileHover={{ scale: 1.2 }}
-              className="p-3 rounded-full bg-purple-500/20 backdrop-blur-sm border border-purple-500/30"
-            >
-              <ArrowDown className="w-6 h-6" />
-            </motion.div>
+
           </motion.div>
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   )
 }

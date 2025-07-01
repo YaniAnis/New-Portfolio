@@ -5,20 +5,32 @@ import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 
 const SIDEBAR_ITEMS = [
-	{ name: "Home", icon: Home, color: "#8B5CF6", href: "#home" },
-	{ name: "About", icon: User, color: "#EC4899", href: "#about" },
-	{
+	{ name: "Home", icon: Home, color: "#8B5CF6", href: "#hero" },
+		{
 		name: "Experience",
 		icon: Briefcase,
 		color: "#10B981",
 		href: "#experience",
 	},
+	{ name: "About", icon: User, color: "#EC4899", href: "#about" },
+
 	{ name: "Projects", icon: Folder, color: "#14B8A6", href: "#projects" },
 	{ name: "Contact", icon: Mail, color: "#F59E0B", href: "#contact" },
 ]
 
 export default function Sidebar() {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+
+	// Smooth scroll handler
+	const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+		if (href.startsWith("#")) {
+			e.preventDefault();
+			const el = document.querySelector(href);
+			if (el) {
+				el.scrollIntoView({ behavior: "smooth" });
+			}
+		}
+	};
 
 	return (
 		<motion.div
@@ -45,6 +57,7 @@ export default function Sidebar() {
 						<motion.a
 							key={item.href}
 							href={item.href}
+							onClick={e => handleNavClick(e, item.href)}
 							initial={{ opacity: 0, x: -20 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ delay: index * 0.1 }}

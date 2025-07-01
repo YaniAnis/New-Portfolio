@@ -12,7 +12,9 @@ export default function Home() {
       <Sidebar />
       <div className="pl-64 flex flex-col min-h-screen">
         <div className="flex-1 flex flex-col overflow-auto ">
-          <Hero />
+          <section id="hero">
+            <Hero />
+          </section>
           <Desktop />
 
           <section id="experience" className="py-20">
