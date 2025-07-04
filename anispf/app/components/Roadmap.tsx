@@ -6,41 +6,30 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 const roadmapData = [
 	{
-		year: "2018",
-		title: "Flowers & Saints Founded",
-		desc: "Our journey began with a passion for minimal design and floral artistry.",
-		side: "left",
-	},
-	{
-		year: "2019",
-		title: "First Major Exhibition",
-		desc: "Showcased our unique blend of digital art and floral arrangements at the Sydney Design Festival.",
-		side: "right",
-	},
-	{
-		year: "2020",
-		title: "Launch of Online Store",
-		desc: "Expanded our reach by bringing our creations to the digital world.",
-		side: "left",
-	},
-	{
-		year: "2021",
-		title: "Collaboration with Top Brands",
-		desc: "Partnered with leading lifestyle brands to create exclusive collections.",
-		side: "right",
-	},
-	{
-		year: "2022",
-		title: "International Recognition",
-		desc: "Received the prestigious International Floral Design Award.",
-		side: "left",
-	},
-	{
 		year: "2023",
-		title: "Expansion to Physical Stores",
-		desc: "Opened our first brick-and-mortar store in the heart of Sydney.",
+		title: "Gradouation From High School",
+		desc: "gradouate with a technical math degree with great montion.",
+		side: "left",
+	},
+	{
+		year: "2024",
+		title: "First Year of University",
+		desc: "Integrating into university life, exploring new horizons in computer science.",
 		side: "right",
 	},
+	{
+		year: "2024",
+		title: "First Internship",
+		desc: "Gained hands-on experience in software development at a local tech startup.",
+		side: "left",
+	},
+	{
+		year: "2025",
+		title: "Launch of My First Project",
+		desc: "Developed the second year football tickets website simulation to showcase my skills and projects.",
+		side: "right",
+	},
+
 ];
 
 export default function Roadmap() {
@@ -114,7 +103,7 @@ export default function Roadmap() {
 		>
 			<h2 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-4">Our Journey</h2>
 			<p className="mb-10 text-gray-300 text-lg">
-				The evolution of Flowers & Saints through the years
+				My evolution through the years
 			</p>
 			{/* Up Arrow Hover Button */}
 			<div

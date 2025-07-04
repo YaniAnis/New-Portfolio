@@ -7,7 +7,7 @@ const skills = [
   {
     icon: Code,
     title: "Full-Stack Development",
-    description: "Expert in React, Next.js, Node.js, and modern web technologies",
+    description: "Expert in React, Next.js, Node.js, PHP, Laravel,and modern web technologies",
     color: "from-purple-500 to-pink-500",
   },
   {
@@ -44,7 +44,7 @@ export default function About() {
           About Me
         </h2>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-          I'm a passionate full-stack developer with over 5 years of experience creating digital solutions that make a
+          I'm a full-stack developer with a few month of experience creating digital solutions that make a
           difference. I specialize in modern web technologies and have a keen eye for design, always striving to bridge
           the gap between functionality and aesthetics.
         </p>
