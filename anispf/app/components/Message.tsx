@@ -3,15 +3,107 @@
 import { motion, useInView } from "framer-motion"
 import { Send, Mail, Phone, DollarSign, User } from "lucide-react"
 import { useRef, useState } from "react"
+import emailjs from "emailjs-com"
 
 export default function Message() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [focusedField, setFocusedField] = useState<string | null>(null)
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    budget: "",
+    message: "",
+  })
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const inputVariants = {
     focused: { scale: 1.02, borderColor: "#8b5cf6" },
     unfocused: { scale: 1, borderColor: "#64748b" },
+  }
+
+  // Update form state on input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  // EmailJS config (replace with your own)
+  const serviceId = "service_m1cs6zm"
+  const templateId = "template_7500ntd"
+  const publicKey = "hkvXKdFB92H-Nrbuh"
+
+  // Vérification simple du numéro de téléphone (10 chiffres, commence par 0 ou +)
+  const isValidPhone = (phone: string) =>
+    /^(\+?\d{10,15}|0\d{9,14})$/.test(phone.trim())
+
+  // Vérification du budget (non vide)
+  const isValidBudget = (budget: string) =>
+    budget.trim().length > 0
+
+  // Ajout de vérifications supplémentaires pour éviter les messages sans sens
+  const isValidName = (name: string) =>
+    name.trim().length >= 2
+
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+
+  const isValidMessage = (message: string) =>
+    message.trim().length >= 10
+
+  // Handle form submit with EmailJS
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setError(null)
+
+    if (!isValidName(form.name)) {
+      setError("Please enter your name (at least 2 characters).")
+      return
+    }
+    if (!isValidEmail(form.email)) {
+      setError("Please enter a valid email address.")
+      return
+    }
+    if (!isValidPhone(form.phone)) {
+      setError("Please enter a valid phone number.")
+      return
+    }
+    if (!isValidBudget(form.budget)) {
+      setError("Please enter your budget range.")
+      return
+    }
+    if (!isValidMessage(form.message)) {
+      setError("Please enter a meaningful message (at least 10 characters).")
+      return
+    }
+
+    setSending(true)
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          phone: form.phone,
+          budget: form.budget,
+          message: form.message,
+        },
+        publicKey
+      )
+      alert("Your message has been sent! Thank you for reaching out.")
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        budget: "",
+        message: "",
+      })
+    } catch (error) {
+      alert("An error occurred while sending your message. Please try again.")
+    }
+    setSending(false)
   }
 
   return (
@@ -57,6 +149,7 @@ export default function Message() {
         <motion.form
           className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-8 shadow-2xl"
           whileHover={{ boxShadow: "0 25px 50px rgba(139, 92, 246, 0.1)" }}
+          onSubmit={handleSubmit}
         >
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             <motion.div
@@ -76,12 +169,15 @@ export default function Message() {
               </motion.div>
               <motion.input
                 type="text"
+                name="name"
                 placeholder="Your Name"
                 className="w-full pl-12 pr-4 py-4 bg-slate-800/50 border border-slate-600/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 outline-none"
                 variants={inputVariants}
                 animate={focusedField === "name" ? "focused" : "unfocused"}
                 onFocus={() => setFocusedField("name")}
                 onBlur={() => setFocusedField(null)}
+                value={form.name}
+                onChange={handleChange}
               />
             </motion.div>
 
@@ -102,12 +198,15 @@ export default function Message() {
               </motion.div>
               <motion.input
                 type="email"
+                name="email"
                 placeholder="Your Email"
                 className="w-full pl-12 pr-4 py-4 bg-slate-800/50 border border-slate-600/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 outline-none"
                 variants={inputVariants}
                 animate={focusedField === "email" ? "focused" : "unfocused"}
                 onFocus={() => setFocusedField("email")}
                 onBlur={() => setFocusedField(null)}
+                value={form.email}
+                onChange={handleChange}
               />
             </motion.div>
           </div>
@@ -130,12 +229,15 @@ export default function Message() {
               </motion.div>
               <motion.input
                 type="tel"
+                name="phone"
                 placeholder="Phone Number"
                 className="w-full pl-12 pr-4 py-4 bg-slate-800/50 border border-slate-600/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 outline-none"
                 variants={inputVariants}
                 animate={focusedField === "phone" ? "focused" : "unfocused"}
                 onFocus={() => setFocusedField("phone")}
                 onBlur={() => setFocusedField(null)}
+                value={form.phone}
+                onChange={handleChange}
               />
             </motion.div>
 
@@ -156,12 +258,15 @@ export default function Message() {
               </motion.div>
               <motion.input
                 type="text"
+                name="budget"
                 placeholder="Budget Range"
                 className="w-full pl-12 pr-4 py-4 bg-slate-800/50 border border-slate-600/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 outline-none"
                 variants={inputVariants}
                 animate={focusedField === "budget" ? "focused" : "unfocused"}
                 onFocus={() => setFocusedField("budget")}
                 onBlur={() => setFocusedField(null)}
+                value={form.budget}
+                onChange={handleChange}
               />
             </motion.div>
           </div>
@@ -173,6 +278,7 @@ export default function Message() {
             transition={{ delay: 0.7 }}
           >
             <motion.textarea
+              name="message"
               placeholder="Tell me about your project... What are your goals, timeline, and any specific requirements?"
               rows={6}
               className="w-full p-4 bg-slate-800/50 border border-slate-600/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 outline-none resize-none"
@@ -180,21 +286,18 @@ export default function Message() {
               animate={focusedField === "message" ? "focused" : "unfocused"}
               onFocus={() => setFocusedField("message")}
               onBlur={() => setFocusedField(null)}
+              value={form.message}
+              onChange={handleChange}
             />
           </motion.div>
-
-          <motion.button
+          {error && (
+            <div className="mb-4 text-red-400 text-center font-semibold">{error}</div>
+          )}
+          <button
             type="submit"
-            whileHover={{
-              scale: 1.02,
-              boxShadow: "0 20px 40px rgba(139, 92, 246, 0.3)",
-              background: "linear-gradient(45deg, #7c3aed, #0d9488)",
-            }}
-            whileTap={{ scale: 0.98 }}
             className="w-full bg-gradient-to-r from-purple-600 to-teal-600 hover:from-purple-700 hover:to-teal-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg transition-all duration-300 flex items-center justify-center gap-3"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.8 }}
+            style={{ cursor: sending ? "not-allowed" : "pointer" }}
+            disabled={sending}
           >
             <motion.div
               animate={{ rotate: [0, 360] }}
@@ -202,8 +305,8 @@ export default function Message() {
             >
               <Send className="w-5 h-5" />
             </motion.div>
-            Send Message
-          </motion.button>
+            {sending ? "Sending..." : "Send Message"}
+          </button>
 
           <motion.div
             className="mt-6 text-center"

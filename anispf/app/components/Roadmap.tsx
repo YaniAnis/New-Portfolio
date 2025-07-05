@@ -148,7 +148,7 @@ export default function Roadmap() {
 
 						return (
 							<motion.li
-								key={item.year}
+								key={item.year + "-" + item.title} // <-- Make key unique
 								ref={itemRef}
 								className="relative flex items-center"
 								initial={{ opacity: 0, y: 40 }}

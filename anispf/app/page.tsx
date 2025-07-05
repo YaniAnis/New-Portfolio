@@ -40,19 +40,17 @@ export default function Home() {
               <div className="flex flex-wrap justify-center items-center gap-8">
                 <ProjectCard
                   photopath="/Footix.png"
-                  title="E-Commerce Platform"
-                  description="A modern, responsive e-commerce solution built with Next.js, featuring real-time inventory management and seamless payment integration."
-                />
+                  title="Footix - Football Tickets"
+                  description="A simulation of a football ticketing website, with an interactive interface and real-time updates. via an admin dashboard. with a user-friendly interface and real-time updates."
+                
+                githubUrl="https://github.com/YaniAnis/ProjetS4"/>
                 <ProjectCard
                   photopath="/Holy.png"
-                  title="AI-Powered Dashboard"
-                  description="An intelligent analytics dashboard that leverages machine learning to provide actionable insights and predictive analytics."
+                  title="Holy Coran"
+                  description="A web application for reading and listening to the Holy Quran, featuring a clean design and easy navigation. with a user-friendly interface and real-time updates."
+                  githubUrl="https://github.com/YaniAnis/Holycoran" 
                 />
-                <ProjectCard
-                  photopath="/placeholder.svg?height=300&width=400"
-                  title="Mobile Banking App"
-                  description="A secure and intuitive mobile banking application with biometric authentication and real-time transaction monitoring."
-                />
+                
               </div>
             </div>
           </section>

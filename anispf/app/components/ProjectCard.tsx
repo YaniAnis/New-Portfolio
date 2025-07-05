@@ -3,16 +3,18 @@
 import type React from "react"
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
-import { ExternalLink, Github, Star, Eye } from "lucide-react"
+import { Github, Star, Eye } from "lucide-react"
 import { useState } from "react"
 
 type ProjectCardProps = {
   photopath: string
   title: string
   description: string
+  liveUrl?: string
+  githubUrl?: string
 }
 
-export default function ProjectCard({ photopath, title, description }: ProjectCardProps) {
+export default function ProjectCard({ photopath, title, description, liveUrl, githubUrl }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -102,16 +104,12 @@ export default function ProjectCard({ photopath, title, description }: ProjectCa
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.9 }}
-              className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 text-white hover:bg-white/30 transition-all duration-200"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: isHovered ? 0 : 20, opacity: isHovered ? 1 : 0 }}
-              transition={{ delay: 0.1 }}
-            >
+            {/* Remove the ExternalLink button */}
+            {/* 
+            <motion.button ...>
               <ExternalLink className="w-5 h-5" />
             </motion.button>
+            */}
             <motion.button
               whileHover={{ scale: 1.1, rotate: -5 }}
               whileTap={{ scale: 0.9 }}
@@ -119,6 +117,12 @@ export default function ProjectCard({ photopath, title, description }: ProjectCa
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: isHovered ? 0 : 20, opacity: isHovered ? 1 : 0 }}
               transition={{ delay: 0.2 }}
+              onClick={() => {
+                if (githubUrl) window.open(githubUrl, "_blank");
+              }}
+              disabled={!githubUrl}
+              style={{ opacity: githubUrl ? 1 : 0.5, cursor: githubUrl ? "pointer" : "not-allowed" }}
+              aria-label="View GitHub Repository"
             >
               <Github className="w-5 h-5" />
             </motion.button>
@@ -172,6 +176,11 @@ export default function ProjectCard({ photopath, title, description }: ProjectCa
             whileTap={{ scale: 0.98 }}
             className="w-full bg-gradient-to-r from-purple-600 to-teal-600 hover:from-purple-700 hover:to-teal-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg"
             animate={{ y: isHovered ? -2 : 0 }}
+            onClick={() => {
+              if (githubUrl) window.open(githubUrl, "_blank");
+            }}
+            disabled={!githubUrl}
+            style={{ opacity: githubUrl ? 1 : 0.5, cursor: githubUrl ? "pointer" : "not-allowed" }}
           >
             View Project
           </motion.button>
@@ -180,3 +189,4 @@ export default function ProjectCard({ photopath, title, description }: ProjectCa
     </motion.div>
   )
 }
+
