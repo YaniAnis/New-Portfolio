@@ -18,6 +18,7 @@ export default function Message() {
   })
   const [sending, setSending] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [customAlert, setCustomAlert] = useState<string | null>(null)
 
   const inputVariants = {
     focused: { scale: 1.02, borderColor: "#8b5cf6" },
@@ -53,6 +54,7 @@ export default function Message() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError(null)
+    setCustomAlert(null)
 
     if (!isValidName(form.name)) {
       setError("Please enter your name (at least 2 characters).")
@@ -89,7 +91,7 @@ export default function Message() {
         },
         publicKey
       )
-      alert("Your message has been sent! Thank you for reaching out.")
+      setCustomAlert("Your message has been sent! Thank you for reaching out.")
       setForm({
         name: "",
         email: "",
@@ -98,13 +100,32 @@ export default function Message() {
         message: "",
       })
     } catch (error) {
-      alert("An error occurred while sending your message. Please try again.")
+      setCustomAlert("An error occurred while sending your message. Please try again.")
     }
     setSending(false)
   }
 
   return (
     <div className="container mx-auto px-6" ref={ref}>
+      {/* Custom Alert */}
+      {customAlert && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mb-6 mx-auto max-w-xl bg-gradient-to-r from-purple-600 to-teal-600 text-white px-6 py-4 rounded-xl shadow-lg flex items-center justify-between"
+        >
+          <span>{customAlert}</span>
+          <button
+            className="ml-4 text-white font-bold px-3 py-1 rounded hover:bg-white/20 transition"
+            onClick={() => setCustomAlert(null)}
+            aria-label="Close alert"
+          >
+            ×
+          </button>
+        </motion.div>
+      )}
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
