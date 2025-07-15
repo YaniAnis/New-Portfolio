@@ -24,25 +24,23 @@ export default function Message() {
     unfocused: { scale: 1, borderColor: "#64748b" },
   }
 
-  // Update form state on input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  // EmailJS config (replace with your own)
+
   const serviceId = "service_m1cs6zm"
   const templateId = "template_7500ntd"
   const publicKey = "hkvXKdFB92H-Nrbuh"
 
-  // Vérification simple du numéro de téléphone (10 chiffres, commence par 0 ou +)
   const isValidPhone = (phone: string) =>
     /^(\+?\d{10,15}|0\d{9,14})$/.test(phone.trim())
 
-  // Vérification du budget (non vide)
+
   const isValidBudget = (budget: string) =>
     budget.trim().length > 0
 
-  // Ajout de vérifications supplémentaires pour éviter les messages sans sens
+
   const isValidName = (name: string) =>
     name.trim().length >= 2
 
@@ -52,7 +50,6 @@ export default function Message() {
   const isValidMessage = (message: string) =>
     message.trim().length >= 10
 
-  // Handle form submit with EmailJS
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError(null)
