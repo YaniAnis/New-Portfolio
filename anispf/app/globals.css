@@ -32,3 +32,5 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+/* Add any additional global styles or responsive utilities here */

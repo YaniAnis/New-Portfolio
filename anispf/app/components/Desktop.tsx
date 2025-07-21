@@ -16,7 +16,7 @@ export default function Desktop() {
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r bg-gray-900"></div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ export default function Desktop() {
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
           className="relative"
-          style={{ width: "100%", height: 600 }}
+          style={{ width: "100%", height: "60vw", maxHeight: 600, minHeight: 300 }}
         >
           {/* Decorative border */}
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-teal-500/20 rounded-3xl blur-sm"></div>
@@ -56,7 +56,7 @@ export default function Desktop() {
               </div>
             </motion.div>
 
-            <Canvas camera={{ position: [7, 2, 0], fov: 25 }} style={{ background: "transparent", height: 600 }}>
+            <Canvas camera={{ position: [7, 2, 0], fov: 25 }} style={{ background: "transparent", height: "60vw", maxHeight: 600, minHeight: 300 }}>
               <ambientLight intensity={0.8} />
               <directionalLight position={[5, 10, 7]} intensity={0.8} />
               <pointLight position={[-5, 5, 5]} intensity={0.3} color="#8b5cf6" />

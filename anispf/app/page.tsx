@@ -8,9 +8,9 @@ import About from "./components/About"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col">
       <Sidebar />
-      <div className="pl-64 flex flex-col min-h-screen">
+      <div className="flex-1 flex flex-col min-h-screen md:pl-64">
         <div className="flex-1 flex flex-col overflow-auto ">
           <section id="hero">
             <Hero />
@@ -27,8 +27,8 @@ export default function Home() {
 
 
 
-          <section id="projects" className="py-20 ">
-            <div className="container mx-auto px-6">
+          <section id="projects" className="py-20">
+            <div className="container mx-auto px-4 sm:px-6">
               <div className="text-center mb-16">
                 <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-4">
                   Featured Projects

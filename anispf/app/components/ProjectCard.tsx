@@ -49,7 +49,7 @@ export default function ProjectCard({ photopath, title, description, liveUrl, gi
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="group max-w-sm perspective-1000"
+      className="group w-full max-w-sm sm:max-w-xs perspective-1000"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
@@ -130,7 +130,7 @@ export default function ProjectCard({ photopath, title, description, liveUrl, gi
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <motion.h3
             className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors duration-300"
             animate={{ x: isHovered ? 5 : 0 }}

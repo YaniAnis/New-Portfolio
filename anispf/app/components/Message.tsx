@@ -106,7 +106,7 @@ export default function Message() {
   }
 
   return (
-    <div className="container mx-auto px-6" ref={ref}>
+    <div className="container mx-auto px-4 sm:px-6" ref={ref}>
       {/* Custom Alert */}
       {customAlert && (
         <motion.div
@@ -165,7 +165,7 @@ export default function Message() {
         className="max-w-2xl mx-auto"
       >
         <motion.form
-          className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-8 shadow-2xl"
+          className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-4 sm:p-8 shadow-2xl"
           whileHover={{ boxShadow: "0 25px 50px rgba(139, 92, 246, 0.1)" }}
           onSubmit={handleSubmit}
         >

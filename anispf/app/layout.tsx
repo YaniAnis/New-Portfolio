@@ -29,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Sidebar is rendered in page.tsx for responsive control */}
         {children}
       </body>
     </html>
