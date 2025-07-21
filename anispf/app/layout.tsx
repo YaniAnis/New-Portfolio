@@ -26,6 +26,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Add favicon using the renamed image */}
+        <link
+          rel="icon"
+          type="image/png"
+          href="/chatgpt-icon.png"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
